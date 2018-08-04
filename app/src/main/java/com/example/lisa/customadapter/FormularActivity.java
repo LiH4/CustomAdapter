@@ -1,7 +1,9 @@
 package com.example.lisa.customadapter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,7 +18,9 @@ import android.widget.ImageView;
 import com.firebase.client.Firebase;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -27,15 +31,11 @@ public class FormularActivity extends AppCompatActivity {
     private EditText name, age, job, search, location, qm, pricing, others;
     private ImageView picture;
 
+    private String CurrentPhotoPath;
     private static final int REQUEST_IMAGE_CHOSEN = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 0;
 
-    private String mCurrentPhotoPath;
-
-
     Firebase myFirebase;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,29 +43,25 @@ public class FormularActivity extends AppCompatActivity {
         setContentView(R.layout.search_formular);
 
         Firebase.setAndroidContext(this);
-
         myFirebase = new Firebase("https://customadapter-61157.firebaseio.com");
+
+        //Fotos aussuchen und schießen teilweise aus Übungsaufgabe ImageCropper übernommen!
+        Intent intent = getIntent();
+        if (intent != null) {
+            if(intent.getType() != null && intent.getType().contains("image/")) {
+                if(intent.getData() != null) {
+                    Uri data = intent.getData();
+                    CurrentPhotoPath = data.toString();
+                    picture = findViewById(R.id.picture1);
+                    picture.setImageURI(data);
+                }
+            }
+        }
 
         initViews();
         selectImage();
         takeImage();
         saveFeed();
-
-        Intent intent = getIntent();
-        if (intent != null) {
-            // TODO Check intent type, set variables and load image to mCropImageView
-
-            if(intent.getType() != null && intent.getType().contains("image/")) {
-                if(intent.getData() != null) {
-                    Uri data = intent.getData();
-                    mCurrentPhotoPath = data.toString();
-                    picture = findViewById(R.id.picture1);
-                    picture.setImageURI(data);
-                }
-            }
-
-        }
-
 
     }
 
@@ -92,46 +88,31 @@ public class FormularActivity extends AppCompatActivity {
                 feed.setQm(qmString);
                 feed.setPricing(pricingString);
                 feed.setOthers(othersString);
-                feed.setPicture1(mCurrentPhotoPath);
+                feed.setPicture1(CurrentPhotoPath);
 
                 myFirebase.child("Feed").setValue(feed);
-
             }
         });
     }
 
-    //Bild von Handy aussuchen
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_IMAGE_CHOSEN && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri uri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                picture.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-
-        }
-    }
-
+    //Foto von Handy aussuchen
     private void selectImage() {
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_CHOSEN);
-
+                Intent openImageGallery = new Intent();
+                openImageGallery.setType("image/*");
+                openImageGallery.setAction(Intent.ACTION_GET_CONTENT);
+                //startActivityForResult(Intent.createChooser(openImageGallery, "Select Picture"), REQUEST_IMAGE_CHOSEN);
+                if(openImageGallery.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(openImageGallery, REQUEST_IMAGE_CHOSEN);
+                }
             }
         });
     }
 
-    public void takeImage() {
+    //Foto schießen
+    private void takeImage() {
         take.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +129,6 @@ public class FormularActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private File createImageFile() throws IOException {
@@ -164,8 +144,54 @@ public class FormularActivity extends AppCompatActivity {
         }
         File imageFile = new File(storageDir, imageFileName);
         // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = imageFile.getAbsolutePath();
+        CurrentPhotoPath = imageFile.getAbsolutePath();
         return imageFile;
+    }
+
+    //Klappt nicht?!
+    private void galleryAddPic() {
+        if (CurrentPhotoPath == null) {
+            return;
+        }
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File file = new File(CurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(file);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        picture = (ImageView) findViewById(R.id.picture1);
+        Bitmap image;
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE && data == null) {
+                galleryAddPic();
+                image = BitmapFactory.decodeFile(CurrentPhotoPath, null);
+                picture.setImageBitmap(image);
+            } else {
+                galleryAddPic();
+                Bundle extras = data.getExtras();
+                if (extras != null) {
+                    image = (Bitmap) extras.get("data");
+                    picture.setImageBitmap(image);
+                }
+
+            }
+
+            if (requestCode == REQUEST_IMAGE_CHOSEN && data != null) {
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                    image = BitmapFactory.decodeStream(inputStream);
+                    picture.setImageBitmap(image);
+                    CurrentPhotoPath = data.getData().toString();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private void initViews() {
@@ -181,9 +207,5 @@ public class FormularActivity extends AppCompatActivity {
         qm = (EditText) findViewById(R.id.qmInput);
         pricing = (EditText) findViewById(R.id.pricingInput);
         others = (EditText) findViewById(R.id.othersInput);
-
-        picture = (ImageView) findViewById(R.id.picture1);
-
-
     }
 }
