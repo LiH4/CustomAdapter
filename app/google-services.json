@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "883548339905",
+    "firebase_url": "https://customadapter-61157.firebaseio.com",
+    "project_id": "customadapter-61157",
+    "storage_bucket": "customadapter-61157.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883548339905:android:a7bf487e51e0a052",
+        "android_client_info": {
+          "package_name": "com.example.lisa.customadapter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883548339905-q2tg7o0429q0ndl5gs4vf0oipp9qft4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lisa.customadapter",
+            "certificate_hash": "91a8b8c91c0dcdf97c24d229cfa1edb6ed4fe4ac"
+          }
+        },
+        {
+          "client_id": "883548339905-duelo2v7smjhjr3obffh2o16ho16vsf1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlGlagrRztrflO-vsgdOA92aK2fUM7m00"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883548339905-duelo2v7smjhjr3obffh2o16ho16vsf1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

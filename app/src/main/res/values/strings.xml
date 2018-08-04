@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CustomAdapter</string>
+
+    <string name="name">Name: </string>
+    <string name="age">Alter: </string>
+    <string name="job">Beruf: </string>
+    <string name="location">Lage: </string>
+    <string name="qm">Qm²: </string>
+    <string name="pricing">Kosten: </string>
+    <string name="others">Sonstiges: </string>
+    <string name="search">Suche: </string>
+
+    <string name="formular">Fill Formular</string>
+    <string name="foto">Take Picture</string>
+    <string name="feed">See Feeds</string>
+    <string name="send">Abschicken</string>
+    <string name="select">Foto auswählen</string>
+    <string name="take">Foto aufnehmen</string>
+
+</resources>

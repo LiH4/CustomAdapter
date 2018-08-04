@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_margin="5dp">
+
+    <LinearLayout
+        android:id="@+id/column_1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight=".5"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/search "
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/location"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/qm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/qm"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/pricing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/pricing"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/others"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="25dp" />
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/ic_launcher_background"
+            android:layout_margin="5dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/column_2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight=".5"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/name"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/age"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/job"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@string/job"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="25dp" />
+
+        <TextView
+            android:id="@+id/search_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/location_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/qm_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/pricing_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/others_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="27dp"/>
+
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/column_3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight=".5"
+        android:layout_margin="5dp">
+
+
+        <TextView
+            android:id="@+id/name_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/age_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp" />
+
+        <TextView
+            android:id="@+id/job_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="230dp" />
+
+
+        <ImageView
+            android:id="@+id/image3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/ic_launcher_background"
+            android:layout_margin="5dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
