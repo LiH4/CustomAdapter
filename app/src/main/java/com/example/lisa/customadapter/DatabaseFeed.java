@@ -2,12 +2,12 @@ package com.example.lisa.customadapter;
 
 public class DatabaseFeed {
     private String name;
-    private String age;
+    private int age;
     private String job;
     private String search;
     private String location;
-    private String qm;
-    private String pricing;
+    private int qm;
+    private int pricing;
     private String others;
     private String picture1;
 
@@ -22,11 +22,11 @@ public class DatabaseFeed {
         this.name = name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -54,19 +54,19 @@ public class DatabaseFeed {
         this.location = location;
     }
 
-    public String getQm() {
+    public int getQm() {
         return qm;
     }
 
-    public void setQm(String qm) {
+    public void setQm(int qm) {
         this.qm = qm;
     }
 
-    public String getPricing() {
+    public int getPricing() {
         return pricing;
     }
 
-    public void setPricing(String pricing) {
+    public void setPricing(int pricing) {
         this.pricing = pricing;
     }
 

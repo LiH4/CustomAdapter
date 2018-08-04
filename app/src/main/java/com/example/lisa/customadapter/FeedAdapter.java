@@ -45,7 +45,7 @@ public class FeedAdapter extends ArrayAdapter {
         name.setText((currentFeed.getName()));
 
         TextView age = (TextView)listItem.findViewById(R.id.age_input);
-        age.setText((currentFeed.getAge()));
+        age.setText(Integer.toString(currentFeed.getAge()));
 
         TextView job = (TextView)listItem.findViewById(R.id.job_input);
         job.setText((currentFeed.getJob()));
@@ -57,18 +57,17 @@ public class FeedAdapter extends ArrayAdapter {
         location.setText((currentFeed.getLocation()));
 
         TextView qm = (TextView)listItem.findViewById(R.id.qm_input);
-        qm.setText((currentFeed.getQm()));
+        qm.setText(Integer.toString(currentFeed.getQm()));
 
         TextView pricing = (TextView)listItem.findViewById(R.id.pricing_input);
-        pricing.setText((currentFeed.getPricing()));
+        pricing.setText(Integer.toString(currentFeed.getPricing()));
 
         TextView others = (TextView)listItem.findViewById(R.id.others_input);
         others.setText((currentFeed.getOthers()));
 
         ImageView image1 = (ImageView)listItem.findViewById(R.id.profilePicture);
         Glide.with(image1).load("https://scontent.fmuc4-1.fna.fbcdn.net/v/t1.0-9/552879_425553407506378_1054855192_n.jpg?_nc_cat=0&oh=e4a59a4ff2746522d61d92494ac73681&oe=5BCC5AC9").into(image1);
-        //image1.setImageResource(Integer.parseInt(currentFeed.getPicure1()));
-
+        //image1.setImageResource(Integer.parseInt(currentFeed.getPicture1()));
 
         return listItem;
     }

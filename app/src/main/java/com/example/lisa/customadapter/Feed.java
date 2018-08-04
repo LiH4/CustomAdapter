@@ -2,18 +2,18 @@ package com.example.lisa.customadapter;
 
 public class Feed {
     private String name;
-    private String age;
+    private int age;
     private String job;
     private String search;
     private String location;
-    private String qm;
-    private String pricing;
+    private int qm;
+    private int pricing;
     private String others;
-//    private String picure1;
+    private String picture1;
 
 
-    public Feed (String name, String age, String job, String search, String location, String qm,
-          String pricing, String others /*,String picure1*/) {
+    public Feed (String name, int age, String job, String search, String location, int qm,
+          int pricing, String others ,String picture1) {
         this.name = name;
         this.age = age;
         this.job = job;
@@ -22,7 +22,7 @@ public class Feed {
         this.qm = qm;
         this.pricing = pricing;
         this.others = others;
-        //this.picure1 = picure1;
+        this.picture1 = picture1;
     }
 
     public String getName() {
@@ -33,11 +33,11 @@ public class Feed {
         this.name = name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -58,11 +58,11 @@ public class Feed {
         this.location = location;
     }
 
-    public String getQm() {
+    public int getQm() {
         return qm;
     }
 
-    public void setQm(String qm) {
+    public void setQm(int qm) {
         this.qm = qm;
     }
 
@@ -74,19 +74,19 @@ public class Feed {
         this.others = others;
     }
 
-//    public String getPicure1() {
-//        return picure1;
-//    }
-//
-//    public void setPicure1(String picure1) {
-//        this.picure1 = picure1;
-//    }
+    public String getPicture1() {
+        return picture1;
+    }
 
-    public String getPricing() {
+    public void setPicture1(String picture1) {
+        this.picture1 = picture1;
+    }
+
+    public int getPricing() {
         return pricing;
     }
 
-    public void setPricing(String pricing) {
+    public void setPricing(int pricing) {
         this.pricing = pricing;
     }
 

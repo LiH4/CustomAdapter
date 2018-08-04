@@ -70,12 +70,12 @@ public class FormularActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String nameString = name.getText().toString();
-                String ageString = age.getText().toString();
+                int ageString = Integer.parseInt(age.getText().toString());
                 String jobString = job.getText().toString();
                 String searchString = search.getText().toString();
                 String locationString = location.getText().toString();
-                String qmString = qm.getText().toString();
-                String pricingString = pricing.getText().toString();
+                int qmString = Integer.parseInt(qm.getText().toString());
+                int pricingString = Integer.parseInt(pricing.getText().toString());
                 String othersString = others.getText().toString();
 
                 DatabaseFeed feed = new DatabaseFeed();

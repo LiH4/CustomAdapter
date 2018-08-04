@@ -62,7 +62,7 @@ public class AdapterActivity extends AppCompatActivity {
         firebase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-                feedAdapter.add(new Feed(dataSnapshot.child("name").getValue(String.class), "24", "Studium der Medieninformatik", "WG", "Regensburg", "45qm²", "350€ kalt", "Stellplatz"));
+                feedAdapter.add(new Feed(dataSnapshot.child("name").getValue(String.class), 24, "Studium der Medieninformatik", "WG", "Regensburg", 45, 350,"Stellplatz", "herz.png"));
             }
 
             @Override
