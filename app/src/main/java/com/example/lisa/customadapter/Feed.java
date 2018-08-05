@@ -49,7 +49,6 @@ public class Feed {
         this.job = job;
     }
 
-
     public String getLocation() {
         return location;
     }

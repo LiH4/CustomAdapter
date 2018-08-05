@@ -13,13 +13,23 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.client.Firebase;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FeedAdapter extends ArrayAdapter {
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    StorageReference pathRef = storageRef.child("images");
+    File localFile;
 
     private Context mContext;
     private List<Feed> feedList = new ArrayList<>();
@@ -66,7 +76,8 @@ public class FeedAdapter extends ArrayAdapter {
         others.setText((currentFeed.getOthers()));
 
         ImageView image1 = (ImageView)listItem.findViewById(R.id.profilePicture);
-        Glide.with(image1).load("https://scontent.fmuc4-1.fna.fbcdn.net/v/t1.0-9/552879_425553407506378_1054855192_n.jpg?_nc_cat=0&oh=e4a59a4ff2746522d61d92494ac73681&oe=5BCC5AC9").into(image1);
+        Glide.with(mContext).using(new FirebaseImageLoader()).load(pathRef).into(image1);
+        //Glide.with(image1).load("https://scontent.fmuc4-1.fna.fbcdn.net/v/t1.0-9/552879_425553407506378_1054855192_n.jpg?_nc_cat=0&oh=e4a59a4ff2746522d61d92494ac73681&oe=5BCC5AC9").into(image1);
         //image1.setImageResource(Integer.parseInt(currentFeed.getPicture1()));
 
         return listItem;

@@ -1,5 +1,6 @@
 package com.example.lisa.customadapter;
 
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,8 @@ public class AdapterActivity extends AppCompatActivity {
 
     private Firebase firebase;
 
+    int age, qm, pricing;
+
 
     //DatabaseReference database = FirebaseDatabase.getInstance().getReference("Feed");
 
@@ -41,6 +44,7 @@ public class AdapterActivity extends AppCompatActivity {
         firebase = new Firebase("https://customadapter-61157.firebaseio.com/");
 
         listView = (ListView)findViewById(R.id.feed_list);
+
         fillAdapter();
         //feedList = new ArrayList<>();
 
@@ -62,7 +66,26 @@ public class AdapterActivity extends AppCompatActivity {
         firebase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-                feedAdapter.add(new Feed(dataSnapshot.child("name").getValue(String.class), 24, "Studium der Medieninformatik", "WG", "Regensburg", 45, 350,"Stellplatz", "herz.png"));
+
+                if(dataSnapshot.child("age").exists()) {
+                    age = dataSnapshot.child("age").getValue(Integer.class);
+                } else {
+                    age = 0;
+                }
+
+                if(dataSnapshot.child("qm").exists()) {
+                    qm = dataSnapshot.child("qm").getValue(Integer.class);
+                } else {
+                    qm = 0;
+                }
+
+                if(dataSnapshot.child("pricing").exists()) {
+                    pricing = dataSnapshot.child("pricing").getValue(Integer.class);
+                } else {
+                    pricing = 0;
+                }
+
+                feedAdapter.add(new Feed(dataSnapshot.child("name").getValue(String.class), age, dataSnapshot.child("job").getValue(String.class), dataSnapshot.child("search").getValue(String.class), dataSnapshot.child("location").getValue(String.class), qm, pricing,dataSnapshot.child("others").getValue(String.class), dataSnapshot.child("picture1").getValue(String.class)));
             }
 
             @Override
