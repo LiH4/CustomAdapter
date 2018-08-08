@@ -1,3 +1,5 @@
+//Anzeigen der einzelnen Einträge mittels eigenen Adapter
+
 package com.example.lisa.customadapter;
 
 import android.support.annotation.IntegerRes;

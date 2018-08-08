@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button seeFeeds, fillFormular;
+    private Button seeFeeds, fillForm;
 
 
     @Override
@@ -17,14 +17,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         seeFeeds = findViewById(R.id.buttonSeeFeed);
-        fillFormular = (Button)findViewById(R.id.buttonFillFormular);
+        fillForm = (Button)findViewById(R.id.buttonFillFormular);
 
         seeFeeds.setOnClickListener(this);
-        fillFormular.setOnClickListener(this);
-
-
-
-
+        fillForm.setOnClickListener(this);
 
     }
 

@@ -1,3 +1,5 @@
+//Klasse für Suchformular
+
 package com.example.lisa.customadapter;
 
 public class Feed {

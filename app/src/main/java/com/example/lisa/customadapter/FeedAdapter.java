@@ -1,3 +1,5 @@
+//Befüllen des Adapters
+
 package com.example.lisa.customadapter;
 
 import android.content.Context;

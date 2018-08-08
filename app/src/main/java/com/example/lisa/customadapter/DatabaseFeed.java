@@ -1,3 +1,5 @@
+//Klasse für Suchfeed aus der DB
+
 package com.example.lisa.customadapter;
 
 public class DatabaseFeed {

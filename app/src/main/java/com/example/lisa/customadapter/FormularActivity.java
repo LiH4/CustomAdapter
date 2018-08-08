@@ -1,3 +1,5 @@
+//Formular für Suche - Eintragen der Daten und speichern in DB
+
 package com.example.lisa.customadapter;
 
 import android.app.Activity;
@@ -27,6 +29,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,6 +53,7 @@ public class FormularActivity extends AppCompatActivity {
     StorageReference storageRef;
 
     private Uri imageData;
+    private Bitmap image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +130,17 @@ public class FormularActivity extends AppCompatActivity {
            progressDialog.show();
 
            StorageReference ref = storageRef.child("images");
-           ref.putFile(imageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+           UploadTask task;
+
+           if(imageData != null) {
+               task = ref.putFile(imageData);
+           } else {
+               ByteArrayOutputStream stream = new ByteArrayOutputStream();
+               image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+               task = ref.putBytes(stream.toByteArray());
+           }
+
+           task.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                @Override
                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                    progressDialog.dismiss();
@@ -209,7 +223,7 @@ public class FormularActivity extends AppCompatActivity {
         return imageFile;
     }
 
-    //Klappt nicht?!
+/*    //Klappt nicht?!
     private void galleryAddPic() {
         if (CurrentPhotoPath == null) {
             return;
@@ -219,18 +233,31 @@ public class FormularActivity extends AppCompatActivity {
         Uri contentUri = Uri.fromFile(file);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        imageData = data.getData();
 
         picture = (ImageView) findViewById(R.id.picture1);
-        Bitmap image;
+
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            galleryAddPic();
+            imageData = data.getData();
+            Bundle extras = data.getExtras();
+            extras.getString(MediaStore.EXTRA_OUTPUT);
+
+            Log.d("FormularActivity", "Capture result: " + data);
+            Log.d("FormularActivity", "Capture result imageData: " + imageData);
+            Log.d("FormularActivity", "Capture result extras: " + extras);
+
+            if(extras != null) {
+                image = extras.<Bitmap>getParcelable("data");
+                imageData = null;
+                picture.setImageBitmap(image);
+            }
+            //galleryAddPic();
+            /*
             if (data == null) {
                 image = BitmapFactory.decodeFile(CurrentPhotoPath, null);
                 picture.setImageBitmap(image);
@@ -244,7 +271,7 @@ public class FormularActivity extends AppCompatActivity {
 
                 }
 
-            }
+            }*/
         }
 
             else if (requestCode == REQUEST_IMAGE_CHOSEN && resultCode == RESULT_OK) {
